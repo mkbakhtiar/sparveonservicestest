@@ -94,3 +94,7 @@ exports.login = function(req,res){
     })
 
 }
+
+exports.securePage = function(req,res){
+    response.ok("This Page Just For Have Token");
+}
