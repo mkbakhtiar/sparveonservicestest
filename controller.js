@@ -17,3 +17,32 @@ exports.showUser = function(req,res){
         }
     })
 }
+
+//show data by id
+exports.showById = function(req, res){
+    let id = req.params.id;
+    connection.query('SELECT * FROM user where id = ?', [id],
+    function(error, rows, fields){
+        if(error){
+            console.log(error);
+        }else{
+            response.ok(rows, res);
+        }
+    })
+}
+
+//post data
+exports.postData = function(req, res){
+    var username = req.body.username;
+    var password = req.body.password;
+
+    connection.query("INSERT INTO user (username, password) VALUES (?,?)", [username, password],
+    function (error, rows, fields){
+        if(error){
+            console.log(error);
+        }else{
+            response.ok("Add Data Succesfully", res);
+        }
+    })
+
+}
