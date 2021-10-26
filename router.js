@@ -1,8 +1,11 @@
 'use strict';
 
 module.exports = function(app){
-    var jsonku = require('./controller');
+    var jsonC = require('./controller');
 
     app.route('/')
-        .get(jsonku.index);
+        .get(jsonC.index);
+
+        app.route('/show')
+        .get(jsonC.showUser);
 }
