@@ -10,9 +10,7 @@ var ip = require('ip');
 exports.register = function(req, res){
     var post = {
         username: req.body.username,
-        password: md5(req.body.password),
-        token:'',
-        ip:''
+        password: md5(req.body.password)
     }
 
     var query = "SELECT username FROM ?? WHERE ??=?";
@@ -38,6 +36,59 @@ exports.register = function(req, res){
                 })
             }else{
                 response.ok("Username sudah terdaftar", res);
+            }
+        }
+    })
+
+}
+
+exports.login = function(req,res){
+    var post = {
+        password: req.body.password,
+        username:req.body.username
+    }
+
+    var query = "SELECT * FROM ?? WHERE ??=? AND ??=?";
+    var table = ["user", "password", md5(post.password), "username", post.username];
+
+    query = mysql.format(query,table);
+    connection.query(query, function(error, rows) {
+        if(error){
+            console.log(error);
+        }else{
+            if(rows.length == 1){
+                var token = jwt.sign({rows}, config.secret, {
+                    expiresIn: 1440
+                });
+
+                id_user = rows[0].id;
+
+                var data = {
+                    id_user:id_user,
+                    token:token,
+                    ip: ip.address
+                }
+
+                var query = "INSERT INTO ?? SET ?";
+                var table = ['access_token'];
+
+                query = mysql.format(query, table);
+                connection.query(query, data, function(error, rows){
+                    if(error){
+                        console.log(error);
+                    }else{
+                        res.json({
+                            success:true,
+                            message:'Generate Token Succesfully',
+                            token:token,
+                            curntUser:data.id_user
+                        });
+                    }
+                })
+
+
+            }else{
+                res.json({"Error": true, "Message":"Username or Password is Invalid"});
             }
         }
     })
