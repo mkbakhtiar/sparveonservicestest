@@ -7,6 +7,6 @@ router.post('/api/v1/register', auth.register);
 router.post('/api/v1/login', auth.login);
 
 //route verification token
-router.get('/api/v1/secure', verifikasi, auth.securePage);
+router.get('/api/v1/scr', verifikasi, auth.securePage);
 
 module.exports = router;
