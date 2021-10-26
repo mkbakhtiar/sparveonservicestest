@@ -1,0 +1,26 @@
+{
+  "name": "sparveonservicestest",
+  "version": "1.0.0",
+  "description": "Test Challange Sparveon Login Register Dashboard and Logout React.Js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mkbakhtiar/sparveonservicestest.git"
+  },
+  "keywords": [
+    "register",
+    "login",
+    "reactjs",
+    "sparveon",
+    "test"
+  ],
+  "author": "Bakhtiar Muhammad",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mkbakhtiar/sparveonservicestest/issues"
+  },
+  "homepage": "https://github.com/mkbakhtiar/sparveonservicestest#readme"
+}
